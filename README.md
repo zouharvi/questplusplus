@@ -22,7 +22,7 @@ This open source software is aimed at quality estimation (QE) for machine transl
   2. [Apache Ant](http://ant.apache.org/bindownload.cgi) (>= 1.9.3) 	
 2. [Python 2.7.6](https://www.python.org/downloads/) (or above - only 2.7 stable distributions)
   1. [NumPy and SciPy](http://www.scipy.org/install.html) (NumPy >=1.6.1 and SciPy >=0.9)
-  2. [scikit-learn](https://pypi.python.org/pypi/scikit-learn/0.15.2) (version 0.15.2)
+  2. [scikit-learn](https://pypi.python.org/pypi/scikit-learn/0.20.3) (version 0.20.3)
   3. [PyYAML](http://pyyaml.org/)
   4. [CRFsuite](http://www.chokkan.org/software/crfsuite/)
   
@@ -411,7 +411,7 @@ implemented by scikit-learn. In this example only the "RBF" kernel is used.
     - verbose is a boolean or integer value indicating the level of verbosity
 
 For more information about the GridSearchCV class please refer to
-http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV
+http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html
 
 
 ## Feature selection

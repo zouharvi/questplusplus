@@ -26,12 +26,12 @@ file which has a similar layout to the Java properties file.
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from evaluation_measures import root_mean_squared_error, mean_absolute_error
 from sklearn.ensemble.forest import ExtraTreesClassifier
-from sklearn.grid_search import GridSearchCV
+from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model.coordinate_descent import LassoCV
 from sklearn.linear_model.least_angle import LassoLarsCV, LassoLars
 from sklearn.linear_model.randomized_l1 import RandomizedLasso
-from sklearn.metrics.metrics import mean_squared_error, f1_score, \
-    precision_score, recall_score
+from sklearn.metrics import mean_squared_error, f1_score, \
+    precision_score, recall_score, make_scorer
 from sklearn.svm.classes import SVR, SVC
 from sklearn_utils import scale_datasets, open_datasets, assert_number, \
     assert_string
@@ -168,9 +168,9 @@ def optimize_model(estimator, X_train, y_train, params, scores, folds, verbose, 
         
         log.debug(params)
         log.debug(scores)
-        
-        clf = GridSearchCV(estimator, params, loss_func=score_func, 
-                           cv=folds, verbose=verbose, n_jobs=n_jobs)
+        clf = GridSearchCV(estimator, params,
+                        scoring=make_scorer(lambda a, b: score_func(a.reshape(-1,1), b.reshape(-1,1))), 
+                        cv=folds, verbose=verbose, n_jobs=n_jobs)
         
         clf.fit(X_train, y_train)
         
@@ -336,7 +336,7 @@ def fit_predict(config, X_train, y_train, X_test=None, y_test=None, ref_thd=None
         y_hat = estimator.predict(X_test)
         log.info("Evaluating prediction on the test set...")
         for scorer_name, scorer_func in scorers:
-            v = scorer_func(y_test, y_hat)
+            v = scorer_func(y_test.reshape(-1,1), y_hat.reshape(-1,1))
             log.info("%s = %s" % (scorer_name, v))
         log.info("Customized scores: ")
         try:
