@@ -15,14 +15,14 @@ models through Conditional Random Fields.
 '''
 
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
-from evaluation_measures import root_mean_squared_error, mean_absolute_error
+from evaluation_measures import root_mean_squared_error
 from sklearn.ensemble.forest import ExtraTreesClassifier
-from sklearn.grid_search import GridSearchCV
+from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model.coordinate_descent import LassoCV
 from sklearn.linear_model.least_angle import LassoLarsCV, LassoLars
 from sklearn.linear_model.randomized_l1 import RandomizedLasso
-from sklearn.metrics.metrics import mean_squared_error, f1_score, \
-	precision_score, recall_score
+from sklearn.metrics import mean_squared_error, mean_absolute_error, \
+	f1_score, precision_score, recall_score
 from sklearn.svm.classes import SVR, SVC
 from sklearn_utils import scale_datasets, open_datasets, assert_number, \
 	assert_string
