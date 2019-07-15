@@ -85,10 +85,14 @@ public class WordLevelFeatureExtractor implements FeatureExtractor{
 
     public void run() {
         //Set output writer for feature values:
-        String outputPath = this.output + File.separator + "output.txt";
+        File outputFile = new File(this.output, "output.txt");
         BufferedWriter outWriter = null;
         try {
-            outWriter = new BufferedWriter(new FileWriter(outputPath));
+            //If the directory containing the file does not exist
+            outputFile.getParentFile().mkdirs();
+            //Create the file if it does not exist yet
+            outputFile.createNewFile();
+            outWriter = new BufferedWriter(new FileWriter(outputFile));
         } catch (IOException ex) {
             Logger.getLogger(WordLevelFeatureExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }
